@@ -1,0 +1,19 @@
+2023-10-16 22:40:01,591 - QTvcp.QTDRAGON_HD_HANDLER - WARNING - QtDragon warning with loading QtWebEngineWidget - is python3-pyqt5.qtwebengine installed?
+2023-10-16 22:40:13,357 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-16 22:40:13,515 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-16 22:40:17,062 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'

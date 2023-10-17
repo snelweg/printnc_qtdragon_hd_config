@@ -1,0 +1,23 @@
+# yl_vfd speed feedback is given in RPM, while some pins need it in
+# RPS, so we use a scale
+loadrt scale names=scale_to_rpm
+
+net spindle-on spindle.0.on => vfd.spindle-on
+net spindle-speed spindle.0.speed-out => vfd.speed-command
+net spindle-cw spindle.0.forward => vfd.spindle-forward
+net spindle-ccw spindle.0.reverse => vfd.spindle-reverse
+net spindle-speed-fb  <= vfd.spindle-speed-fb
+net spindle-current <= vfd.OutA
+net spindle-voltage <= vfd.OutF
+
+net spindle-comm-ok <= vfd.hycomm-ok
+
+net spindle-at-speed vfd.spindle-at-speed => spindle.0.at-speed
+
+net spindle-current => qtdragon.spindle-amps
+net spindle-voltage => qtdragon.spindle-volts
+
+addf scale_to_rpm servo-thread
+setp scale_to_rpm.gain 0.01666666
+net spindle-speed-fb => scale_to_rpm.in
+net spindle-speed-in spindle.0.speed-in <= scale_to_rpm.out
