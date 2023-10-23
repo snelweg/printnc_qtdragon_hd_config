@@ -1,11 +1,12 @@
 [DIALOG_GEOMETRY]
 AboutDialog-geometry = half
-LncMessage-geometry = 910 539 280 118
+LncMessage-geometry = 910 539 232 122
 ToolChangeDialog-geometry = 910 539 340 237
 basicProbeHelpDialog-geometry = default
 VersaHelpDialog-geometry = default
 CalculatorDialog-geometry = 910 539 472 376
 _CALCULATOR = 910 539 472 376
+RunFromLineDialog-geometry = default
 
 [DIALOG_OPTIONS]
 EntryDialog_play_sound = True
@@ -23,9 +24,10 @@ RunFromLineDialog_play_sound = True
 RunFromLineDialog_sound_type = READY
 
 [BOOK_KEEPING]
-last_loaded_directory = /usr/share/linuxcnc/ncfiles/remap-subroutines
-last_loaded_file = /usr/share/linuxcnc/ncfiles/remap-subroutines/qt_auto_probe_tool.ngc
+last_loaded_directory = /home/ken/linuxcnc/programs
+last_loaded_file = /home/ken/linuxcnc/programs/skateboard_form_mellow.ngc
 style_QSS_Path = DEFAULT
+RecentPath_0 = /home/ken/linuxcnc/programs/skateboard_form_mellow.ngc
 
 [ORIGINOFFSET_SYSTEM_NAMES]
 __dialogOffsetViewWidget-G54 = User System 1
@@ -91,14 +93,14 @@ gcodegraphics-user-lat = 0.0
 gcodegraphics-user-lon = 0.0
 
 [CUSTOM_FORM_ENTRIES]
-Tool to load = 0
+Tool to load = 2
 Laser X = 100.0
 Laser Y = -20.0
-Sensor X = 4.7
-Sensor Y = 25.0
+Sensor X = 5.3
+Sensor Y = 21.48
 Camera X = 10.0
 Camera Y = 10.0
-Work Height = 0.0
+Work Height = 50.49
 Touch Height = 40.0
 Sensor Height = 45.0
 Search Velocity = 120.0
@@ -138,7 +140,7 @@ Cal y width = 0
 Cal diameter = 0
 
 [VERSA_PROBE_OPTIONS]
-ps_searchvel = 80.0
+ps_searchvel = 100.0
 ps_probevel = 100.0
 ps_z_clearance = 3.0
 ps_probe_max = 1.0
@@ -147,12 +149,12 @@ ps_probe_latch = 0.5
 ps_probe_diam = 2.0
 ps_xy_clearance = 5.0
 ps_side_edge_length = 5.0
-ps_probe_height = 45.0
+ps_probe_height = 50.8
 ps_block_height = 0.0
 use_tool_measurement = True
 ps_offs_x = 0.0
 ps_offs_y = 0.0
 ps_offs_z = 0.0
 ps_offs_angle = 0.0
-ps_probe_rapid_vel = 60.0
+ps_probe_rapid_vel = 80.0
 

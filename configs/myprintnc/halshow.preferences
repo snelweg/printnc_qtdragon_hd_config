@@ -1,13 +1,16 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 700x475+384+232
-placeFrames 0.4752906976744186
-set ::ratio 0.4752906976744186
+wm geometry . 1920x997+0+27
+placeFrames 0.4796511627906977
+set ::ratio 0.4796511627906977
 set ::old_w_leftf 160
 set ::watchlist {
     pin+joint.0.home-sw-in
     pin+joint.1.home-sw-in
     pin+joint.2.home-sw-in
+    pin+qtdragon.slider-jogspeed-linear
+    pin+qtdragon.slider-override-maxv
+    param+traj.vel_out
 }
 set ::workmode watchhal
 set ::watchInterval 100

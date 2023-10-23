@@ -1,17 +1,149 @@
-2023-10-16 22:40:01,591 - QTvcp.QTDRAGON_HD_HANDLER - WARNING - QtDragon warning with loading QtWebEngineWidget - is python3-pyqt5.qtwebengine installed?
-2023-10-16 22:40:13,357 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+2023-10-23 07:30:09,955 - QTvcp.QTDRAGON_HD_HANDLER - WARNING - QtDragon warning with loading QtWebEngineWidget - is python3-pyqt5.qtwebengine installed?
+2023-10-23 07:30:50,096 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
 Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
     messageid = self.statusbar.showMessage(message, timeout * 1000)
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2023-10-16 22:40:13,515 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+2023-10-23 07:30:50,134 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
 Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
     messageid = self.statusbar.showMessage(message, timeout * 1000)
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2023-10-16 22:40:17,062 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+2023-10-23 07:31:02,614 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 07:35:11,514 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 07:35:11,609 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 07:35:11,772 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 07:40:09,510 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 07:40:09,613 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 07:40:09,702 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:22:28,780 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:22:44,414 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:24:44,255 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:24:44,331 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:25:02,624 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:26:52,583 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:28:35,449 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:30:52,715 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 08:53:57,052 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 09:18:02,670 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 09:24:55,286 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 09:24:55,511 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 09:24:55,648 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 10:19:09,022 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 10:19:09,284 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
+    messageid = self.statusbar.showMessage(message, timeout * 1000)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2023-10-23 10:19:09,485 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
 Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
     messageid = self.statusbar.showMessage(message, timeout * 1000)
