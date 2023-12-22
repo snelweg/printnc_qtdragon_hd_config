@@ -1,0 +1,74 @@
+(drop current tool into target pocket)
+o<_drop_tool> sub
+M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+o100 if[#<_current_tool> EQ 0]
+    M72 ; Restore modal state
+    (ABORT, No tool is currently loaded!)
+o100 endif 
+o101 if[#1 EQ 0 OR #1 GT #<_hal[rapid_atc.num_pockets]>]
+    M72 ; Restore modal state
+    (ABORT, Pocket number invalid, expected a value between 1 and #<_hal[rapid_atc.num_pockets]>, got #1)
+o101 endif
+(print, mounteds tool = #<_current_tool>)
+(print, Dropping tool into pocket #1)
+#<droppocket>= #1
+G61 ; Use exact stop mode
+G90 ; Ensure everything that we do is done in absolute coordinates
+G40 ; Cutter comp off, otherwise G53 might go wrong
+G49 ; Cancel tool offset (not needed until the end)
+(print, rapid move to safe Z)
+G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; First things first, rapid to safe Z
+#<xpos> = 1
+#<ypos> = 1
+o102 if[#<_hal[rapid_atc.align_axis]> EQ 0]
+; align axis is along X
+    (print, pockets arranged along X axis)
+    #<xpos> = [#<_hal[rapid_atc.first_pocket_x]> + [#<droppocket> - 1] * #<_hal[rapid_atc.pocket_offset]> * #<_hal[rapid_atc.align_dir]>]
+    #<ypos> = #<_hal[rapid_atc.first_pocket_y]>
+    (print, xpos = #<xpos>, ypos = #<ypos>)
+o102 else
+; align axis is along Y
+    (print, pockets arranged along Y axis)
+    #<ypos> = [#<_hal[rapid_atc.first_pocket_y]> + [#<droppocket> - 1] * #<_hal[rapid_atc.pocket_offset]> * #<_hal[rapid_atc.align_dir]>]
+    #<xpos> = #<_hal[rapid_atc.first_pocket_x]>
+    (print, xpos = #<xpos>, ypos = #<ypos>) 
+o102 endif
+(print, Moving to position: X#<xpos>, Y#<ypos>)
+G53 G0 X[#<xpos>] Y[#<ypos>]
+;M61 Q0     
+(print, Opening dust cover..)
+M65 P0 ; open dust cover
+G4 P2.0 ; dwell to allow cover to open
+(print, Moving to Z IR engage position..)
+G53 G0 Z[#<_hal[rapid_atc.z_ir_engage]>]
+M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0 ; Check that IR sensor is indicating no tool
+#<_tool_sensor_empty> = 0 ; hard coded for testing
+o103 if [#<_tool_sensor_empty> EQ 1]
+    (print, No tool detected in spindle - Aborting!)
+    o103 return [-1]
+o103 endif
+(print, Rotating spindle CCW)
+M4 S1200 ; Rotate spindle CCW
+G4 P 2.0 ; dwell for a moment
+(print, Moving Z to  engage position to dump tool..)
+G53 G1 Z[#<_hal[rapid_atc.engage_z]>] F40 ; dump tool into pocket
+(print, Moving Z back to IR engage position)
+G53 G0 Z[#<_hal[rapid_atc.z_ir_engage]>] ; move back to IR engage 
+(print, Stopping spindle)
+M5 ;stop spindle
+G4 P2.0 ; dwell for a moment
+(print, Checking IR sensor..)
+M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0  ; Check that IR sensor is indicating no tool
+#<_tool_sensor_empty> = 1 ; hard coded for testing
+o104 if [#<_tool_sensor_empty> EQ 0]
+    (print, Timeout! Tool still in spindle - Aborting!)
+    o104 return [-1]
+o104 endif
+; good!
+(print, Succesfully dumped tool into pocket)
+M61 Q0 ; Clear tool
+(print, Returning to Safe Z Position)
+G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; Rapid back to Safe Z
+o<_drop_tool> return [0]
+o<_drop_tool> endsub
+M2
