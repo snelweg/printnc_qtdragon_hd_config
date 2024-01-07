@@ -1,16 +1,31 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1920x997+0+27
+wm geometry . 1920x997+202+156
 placeFrames 0.4796511627906977
 set ::ratio 0.4796511627906977
 set ::old_w_leftf 160
 set ::watchlist {
     pin+joint.0.home-sw-in
-    pin+joint.1.home-sw-in
-    pin+joint.2.home-sw-in
-    pin+qtdragon.slider-jogspeed-linear
-    pin+qtdragon.slider-override-maxv
-    param+traj.vel_out
+    pin+rapid_atc.align_axis
+    pin+rapid_atc.pocket_offset
+    pin+rapid_atc.pickup_feed_rate
+    pin+rapid_atc.dust_cover_state
+    pin+rapid_atc.drop_feed_rate
+    pin+rapid_atc.tool_t1
+    pin+rapid_atc.tool_t8
+    pin+rapid_atc.tool_t6
+    pin+rapid_atc.tool_t4
+    pin+rapid_atc.tool_t3
+    pin+iocontrol.0.tool-from-pocket
+    pin+iocontrol.0.tool-prep-index
+    pin+iocontrol.0.tool-prep-number
+    pin+iocontrol.0.tool-prep-pocket
+    pin+iocontrol.0.tool-change
+    pin+iocontrol.0.tool-changed
+    pin+iocontrol.0.lube_level
+    pin+iocontrol.0.lube
+    pin+iocontrol.0.emc-enable-in
+    pin+iocontrol.0.coolant-flood
 }
 set ::workmode watchhal
 set ::watchInterval 100

@@ -1,12 +1,13 @@
 [DIALOG_GEOMETRY]
 AboutDialog-geometry = half
-LncMessage-geometry = 910 539 232 122
-ToolChangeDialog-geometry = 910 539 340 237
+LncMessage-geometry = 910 539 280 118
+ToolChangeDialog-geometry = 784 372 340 237
 basicProbeHelpDialog-geometry = default
 VersaHelpDialog-geometry = default
 CalculatorDialog-geometry = 910 539 472 376
 _CALCULATOR = 910 539 472 376
 RunFromLineDialog-geometry = default
+EntryDialog-geometry = 910 539 300 150
 
 [DIALOG_OPTIONS]
 EntryDialog_play_sound = True
@@ -24,8 +25,8 @@ RunFromLineDialog_play_sound = True
 RunFromLineDialog_sound_type = READY
 
 [BOOK_KEEPING]
-last_loaded_directory = /home/ken/linuxcnc/programs
-last_loaded_file = /home/ken/linuxcnc/programs/skateboard_form_mellow.ngc
+last_loaded_directory = /home/ken/linuxcnc/configs/myprintnc/macros
+last_loaded_file = /home/ken/linuxcnc/configs/myprintnc/macros/tool_change.ngc
 style_QSS_Path = DEFAULT
 RecentPath_0 = /home/ken/linuxcnc/programs/skateboard_form_mellow.ngc
 
@@ -111,7 +112,7 @@ Z Safe Travel = 5.0
 Eoffset count = 0
 External offsets = False
 Reload program = False
-Reload tool = False
+Reload tool = True
 Use keyboard = False
 Use tool sensor = True
 Use tool touchplate = False
@@ -157,4 +158,26 @@ ps_offs_y = 0.0
 ps_offs_z = 0.0
 ps_offs_angle = 0.0
 ps_probe_rapid_vel = 80.0
+
+[RAPID_ATC]
+num_pockets = 6
+pocket_offset = -45
+first_pocket_x = 474.570
+first_pocket_y = 560.160
+z_engage = -129
+z_ir_engage = -100
+z_safe_clearance = 0
+cover_hal_dpin = 2
+ir_hal_dpin = 3
+x_manual_change_pos = 0
+y_manual_change_pos = 0
+align_axis = X
+align_dir = NEG
+ir_enabled = True
+cover_enabled = True
+pickup_rate = 2000
+drop_rate = 2000
+spindle_speed_pickup = 1500
+spindle_speed_drop = 1500
+z_engage_drop_offset = 0
 

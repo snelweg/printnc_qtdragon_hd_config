@@ -1,0 +1,54 @@
+; MIT License
+
+; Copyright 2023 Kenneth Thompson
+
+; Permission is hereby granted, free of charge, to any person obtaining a copy
+; of this software and associated documentation files (the "Software"), to deal
+; in the Software without restriction, including without limitation the rights
+; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+; copies of the Software, and to permit persons to whom the Software is
+; furnished to do so, subject to the following conditions:
+
+; The above copyright notice and this permission notice shall be included in all
+; copies or substantial portions of the Software.
+
+; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+; SOFTWARE.
+o<tool_change> sub
+M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+o100 if[#<_current_tool> EQ 0]
+    M72 ; Restore modal state
+    (ABORT, No tool is currently loaded!)
+o100 endif 
+#<current_pocket> = #<_hal[iocontrol.0.tool-from-pocket]>
+M66 E0
+#<new_pocket> = #<_hal[iocontrol.0.tool-prep-pocket]>  
+(print, current pocket = #<current_pocket>, new_pocket = #<new_pocket>) ;' tool in spindle = #<tool_in_spindle>, selected tool = #<selected_tool>, current pocket = #<current_pocket>, selected pocket = #<selected_pocket>, #<newpocket>)
+
+o101 if[#1 EQ 0 OR #1 GT #<_hal[rapid_atc.num_pockets]>]
+    M72 ; Restore modal state
+    (ABORT, Pocket number invalid, expected a value between 1 and #<_hal[rapid_atc.num_pockets]>, got #1)
+o101 endif
+
+O102 if [#<_task> EQ 0] ; we must execute this macro only in the milltask interpreter or preview will break, so test for '#<_task>' which is 1 for  the milltask interpreter and 0 in the UI's
+        (print, Task is Null)
+O102     return [999]
+O102 endif
+
+(print, mounteds tool = #<_current_tool>)
+(print, Dropping tool into pocket #1)
+#<droppocket>= #1
+G61 ; Use exact stop mode
+G90 ; Ensure everything that we do is done in absolute coordinates
+G40 ; Cutter comp off, otherwise G53 might go wrong
+G49 ; Cancel tool offset (not needed until the end)
+(print, rapid move to safe Z)
+G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; First things first, rapid to safe Z
+o<tool_change> return [0]
+o<tool_change> endsub
+M2

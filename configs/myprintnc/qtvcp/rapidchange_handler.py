@@ -38,7 +38,7 @@ debugpy.listen(('0.0.0.0',5678))
 
 # Set up logging
 from qtvcp import logger
-from qtvcp.core import Info, Status, Qhal
+from qtvcp.core import Info, Status, Qhal, Action
 
 from PyQt5 import QtGui
 
@@ -47,6 +47,7 @@ log = logger.getLogger(__name__)
 INFO = Info()
 STATUS = Status()
 QHAL = Qhal()
+ACTION = Action()
 
 # Set the log level for this module
 log.setLevel(logger.DEBUG) # One of DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -83,6 +84,13 @@ class ToolTableReader():
             if tool.id == f'T{str(toolid)}':
                 return int(tool.pocket[1:])
         return -1
+    
+    def get_tools(self) -> dict:
+        ret = {}
+        for tool in self.tools:
+            ret[tool.id] = int(tool.pocket[1:])
+        return ret
+
       
 class AtcHalPin(StrEnum):
     SAFE_Z = 'safe_z'
@@ -92,17 +100,19 @@ class AtcHalPin(StrEnum):
     FIRST_POCKET_X = 'first_pocket_x'
     FIRST_POCKET_Y = 'first_pocket_y'
     ENGAGE_Z =  'engage_z'
+    ENGAGE_Z_DROP_OFFSET = 'engage_z_drop_offset'
     ALIGN_AXIS = 'align_axis'
-    ALIGN_DIR = 'align_dir'
+    #ALIGN_DIR = 'align_dir'
     IR_HAL_DPIN = 'ir_hal_dpin'
     COVER_HAL_DPIN = 'cover_hal_dpin'
-    ENGAGE_FEED_RATE = 'engage_feed_rate'
     DROP_RATE = 'drop_feed_rate'
     PICKUP_RATE = 'pickup_feed_rate'
-    SPINDLE_SPEED = 'spindle_speed'
+    SPINDLE_SPEED_PICKUP = 'spindle_speed_pickup'
+    SPINDLE_SPEED_DROP = 'spindle_speed_drop'
     X_MANUAL_CHANGE_POS = 'x_manual_change_pos'
     Y_MANUAL_CHANGE_POS = 'y_manual_change_pos'
     CURRENT_TOOL_POCKET = 'current_tool_pocket'
+    TOOL_INDEX = 'tool_'
     IR_ENABLED = 'ir_enabled'
     COVER_ENABLED = 'cover_enabled'
     DUST_COVER_STATE = 'dust_cover_state'
@@ -116,6 +126,7 @@ class ConfigElement(StrEnum):
     FIRST_POCKET_X = 'first_pocket_x'
     FIRST_POCKET_Y = 'first_pocket_y'
     Z_ENGAGE = 'z_engage'
+    Z_ENGAGE_DROP_OFFSET = 'z_engage_drop_offset'
     Z_IR_ENGAGE = 'z_ir_engage'
     COVER_HAL_DPIN = 'cover_hal_dpin'
     IR_HAL_DPIN = 'ir_hal_dpin'
@@ -123,11 +134,11 @@ class ConfigElement(StrEnum):
     X_MANUAL_CHANGE_POS = 'x_manual_change_pos'
     Y_MANUAL_CHANGE_POS = 'y_manual_change_pos'
     ALIGN_AXIS = 'align_axis'
-    ALIGN_DIR = 'align_dir'
-    ENGAGE_FEED_RATE = 'engage_feed_rate'
+    #ALIGN_DIR = 'align_dir'
     PICKUP_RATE = 'pickup_rate'
     DROP_RATE = 'drop_rate'
-    SPINDLE_SPEED = 'spindle_speed'
+    SPINDLE_SPEED_PICKUP = 'spindle_speed_pickup'
+    SPINDLE_SPEED_DROP = 'spindle_speed_drop'
     IR_ENABLED = 'ir_enabled'
     COVER_ENABLED = 'cover_enabled'
     
@@ -210,12 +221,13 @@ class HandlerClass:
             self.c.newpin(AtcHalPin.X_MANUAL_CHANGE_POS, hal.HAL_FLOAT, hal.HAL_IN)
             self.c.newpin(AtcHalPin.Y_MANUAL_CHANGE_POS, hal.HAL_FLOAT, hal.HAL_IN)
             self.c.newpin(AtcHalPin.ENGAGE_Z, hal.HAL_FLOAT, hal.HAL_IN)
+            self.c.newpin(AtcHalPin.ENGAGE_Z_DROP_OFFSET, hal.HAL_FLOAT, hal.HAL_IN)
             self.c.newpin(AtcHalPin.ALIGN_AXIS, hal.HAL_BIT, hal.HAL_IN)
-            self.c.newpin(AtcHalPin.ALIGN_DIR, hal.HAL_S32, hal.HAL_IN)
-            self.c.newpin(AtcHalPin.ENGAGE_FEED_RATE, hal.HAL_S32, hal.HAL_IN)
+            #self.c.newpin(AtcHalPin.ALIGN_DIR, hal.HAL_S32, hal.HAL_IN)
             self.c.newpin(AtcHalPin.DROP_RATE, hal.HAL_S32, hal.HAL_IN)
             self.c.newpin(AtcHalPin.PICKUP_RATE, hal.HAL_S32, hal.HAL_IN)
-            self.c.newpin(AtcHalPin.SPINDLE_SPEED, hal.HAL_S32, hal.HAL_IN)
+            self.c.newpin(AtcHalPin.SPINDLE_SPEED_PICKUP, hal.HAL_S32, hal.HAL_IN)
+            self.c.newpin(AtcHalPin.SPINDLE_SPEED_DROP, hal.HAL_S32, hal.HAL_IN)
             self.c.newpin(AtcHalPin.CURRENT_TOOL_POCKET, hal.HAL_S32, hal.HAL_IN)
             self.c.newpin(AtcHalPin.IR_ENABLED, hal.HAL_BIT, hal.HAL_IN)
             self.c.newpin(AtcHalPin.COVER_ENABLED, hal.HAL_BIT, hal.HAL_IN)
@@ -224,13 +236,14 @@ class HandlerClass:
             self.c.newpin(AtcHalPin.DUST_COVER_STATE, hal.HAL_BIT, hal.HAL_OUT)
             # Wire periodic update function
             STATUS.connect('periodic', lambda w: self.updatePeriodic())
+            STATUS.connect('general', self.dialog_return)
             
             # UI elements
-            self.w.pbSetXYPocketOne.clicked.connect( lambda: self.setXYPocketOne() )
+            self.w.btnSetXYPocketOne.clicked.connect( lambda: self.setXYPocketOne() )
 
-            self.w.pbSetZEngage.clicked.connect(lambda: self.setZEngage() )
+            self.w.btnSetZEngage.clicked.connect(lambda: self.setZEngage() )
 
-            self.w.pbSetZIREngage.clicked.connect(lambda: self.setZIREngage() )
+            self.w.btnSetZIREngage.clicked.connect(lambda: self.setZIREngage() )
 
             self.w.btnAdd.clicked.connect(lambda: (self.w.tooloffsetview.add_tool(),\
                                             self.w.tooloffsetview.repaint()))
@@ -242,17 +255,15 @@ class HandlerClass:
             self.w.pbToolChangeTest.clicked.connect(
                 lambda: self.executeProgram('o<_tool_change> call [5]')
             )
-            self.w.pbDropToolTest.clicked.connect(
+            self.w.btnDropTool.clicked.connect(
                 lambda: self.executeProgram(f'o<_drop_tool> call [{self.currentToolPocketNo}]')
             )
 
-            self.w.btnIREnabled.clicked.connect(
-                lambda: ( self.setIREnabled(not self.w.btnIREnabled.isChecked()))
+            self.w.btnPickupTool.clicked.connect(
+                lambda: self.loadToolViaATC()
             )
 
-            self.w.btnCoverEnabled.clicked.connect(
-                lambda: ( self.setCoverEnabled(not self.w.btnCoverEnabled.isChecked()))
-            )
+
 
             self.w.btnDustCoverToggle.clicked.connect(
                 lambda: self.toggleDustCover()
@@ -260,6 +271,12 @@ class HandlerClass:
 
 
             self.w.btnM61.clicked.connect( lambda: self.loadToolViaM61() )
+
+            '''
+            future items, which may never be implemented
+            '''
+            self.w.gbToolSetter.setVisible(False)
+            self.w.gbToolSetterTouch.setVisible(False)
             
             '''
                 Removed columns from tooloffsetview that are extraneous/unused by ATC Logic
@@ -292,14 +309,14 @@ class HandlerClass:
             '''
                 pocket_offset : Offset between tool pockets
             '''
-            pocket_offset = self.w.MAIN.PREFS_.getpref(ConfigElement.POCKET_OFFSET, "52.1", str, ConfigElement.ATC_SECTION)
+            pocket_offset = self.w.MAIN.PREFS_.getpref(ConfigElement.POCKET_OFFSET, "45", str, ConfigElement.ATC_SECTION)
             log.debug(f'{ConfigElement.POCKET_OFFSET} = {pocket_offset}')
             self.c[AtcHalPin.POCKET_OFFSET] = float(pocket_offset)
             self.pocketOffsetInput = self.w.lePocketOffset
             
             self.pocketOffsetInput.setValidator(
             QtGui.QDoubleValidator(
-                0.0, # bottom
+                -5000, # bottom
                 5000, # top
                 3, # decimals 
                 notation=QtGui.QDoubleValidator.StandardNotation
@@ -370,6 +387,27 @@ class HandlerClass:
                 log.debug(f'SETTING {ConfigElement.Z_ENGAGE} = {self.zEngageInput.text()} in preferences'),
                 self.setPinValue( pinName = AtcHalPin.ENGAGE_Z, pinVal = float(self.zEngageInput.text()))))
             '''
+                z_engage_drop_offset : Z engage offset position for drops
+            '''
+            z_engage_drop_offset = self.w.MAIN.PREFS_.getpref(ConfigElement.Z_ENGAGE_DROP_OFFSET, "0", str, ConfigElement.ATC_SECTION)
+            log.debug(f'{ConfigElement.Z_ENGAGE_DROP_OFFSET} = {z_engage_drop_offset}')
+            self.c[AtcHalPin.ENGAGE_Z_DROP_OFFSET] = float(z_engage)
+            self.zEngageDropOffsetInput = self.w.leZToolDropOffset
+            self.zEngageDropOffsetInput.setValidator(
+            QtGui.QDoubleValidator(
+                -5000, # bottom
+                5000, # top
+                3, # decimals 
+                notation=QtGui.QDoubleValidator.StandardNotation
+            ))
+            self.zEngageDropOffsetInput.setText(str(z_engage_drop_offset))
+            self.zEngageDropOffsetInput.editingFinished.connect(
+                lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.Z_ENGAGE, self.zEngageDropOffsetInput.text(), str, ConfigElement.ATC_SECTION),
+                log.debug(f'SETTING {ConfigElement.Z_ENGAGE_DROP_OFFSET} = {self.zEngageDropOffsetInput.text()} in preferences'),
+                self.setPinValue( pinName = AtcHalPin.ENGAGE_Z_DROP_OFFSET, pinVal = float(self.zEngageDropOffsetInput.text()))))
+
+                
+            '''
                 z_ir_engage : Z IR engage position
             '''
             z_ir_engage = self.w.MAIN.PREFS_.getpref(ConfigElement.Z_IR_ENGAGE, "0", str, ConfigElement.ATC_SECTION)
@@ -387,7 +425,7 @@ class HandlerClass:
             self.zEngageIRInput.editingFinished.connect(
                 lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.Z_IR_ENGAGE, self.zEngageIRInput.text(), str, ConfigElement.ATC_SECTION),
                 log.debug(f'SETTING {ConfigElement.Z_IR_ENGAGE} = {self.zEngageIRInput.text()} in preferences'),
-                self.setPinValue( pinName = AtcHalPin.ENGAGE_IR_Z, pinVal = float(self.zEngageIRInput.text()))))
+                self.setPinValue( pinName = AtcHalPin.Z_IR_ENGAGE, pinVal = float(self.zEngageIRInput.text()))))
             '''
                 z_safe_clearance 
             '''
@@ -426,11 +464,11 @@ class HandlerClass:
             log.debug(f'{ConfigElement.IR_HAL_DPIN} = {ir_hal_dpin}')
             self.c[AtcHalPin.IR_HAL_DPIN] = int(ir_hal_dpin)
             self.irDPinInput = self.w.leIRDPinInput
-            self.coverDPinInput.setText(str(ir_hal_dpin))
-            self.coverDPinInput.editingFinished.connect(
-                lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.IR_HAL_DPIN, self.coverDPinInput.text(), str, ConfigElement.ATC_SECTION),
-                log.debug(f'SETTING {ConfigElement.IR_HAL_DPIN} = {self.coverDPinInput.text()} in preferences'),
-                self.setPinValue( pinName = AtcHalPin.IR_HAL_DPIN, pinVal = int(self.coverDPinInput.text()))))
+            self.irDPinInput.setText(str(ir_hal_dpin))
+            self.irDPinInput.editingFinished.connect(
+                lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.IR_HAL_DPIN, self.irDPinInput.text(), str, ConfigElement.ATC_SECTION),
+                log.debug(f'SETTING {ConfigElement.IR_HAL_DPIN} = {self.irDPinInput.text()} in preferences'),
+                self.setPinValue( pinName = AtcHalPin.IR_HAL_DPIN, pinVal = int(self.irDPinInput.text()))))
             '''
                 x_manual_change_pos 
             '''
@@ -505,7 +543,7 @@ class HandlerClass:
                 )
             '''
                 align_dir
-            '''
+            
             align_dir = self.w.MAIN.PREFS_.getpref(ConfigElement.ALIGN_DIR, 'POS', str, ConfigElement.ATC_SECTION)
             log.debug(f'{ConfigElement.ALIGN_DIR} = {align_dir}')
             if align_dir.lower() == 'pos':
@@ -534,9 +572,10 @@ class HandlerClass:
                     log.debug(f'SETTING {ConfigElement.ALIGN_DIR} = NEG in preferences'))
                 )
             '''
-                engage_feed_rate 
             '''
-            engage_feed_rate = self.w.MAIN.PREFS_.getpref(ConfigElement.ENGAGE_FEED_RATE, 200, int, ConfigElement.ATC_SECTION)
+                engage_feed_rate 
+            
+            engage_feed_rate = self.w.MAIN.PREFS_.getpref(ConfigElement.ENGAGE_FEED_RATE, 1800, int, ConfigElement.ATC_SECTION)
             log.debug(f'{ConfigElement.ENGAGE_FEED_RATE} = {engage_feed_rate}')
             self.engageFeedRateInput = self.w.leSFEngageFeedRate
             self.engageFeedRateInput.setText(str(engage_feed_rate))
@@ -546,51 +585,131 @@ class HandlerClass:
                 log.debug(f'SETTING {ConfigElement.ENGAGE_FEED_RATE} = {self.engageFeedRateInput.text()} in preferences'))
                 )
             
+            self.engageFeedRateInput.setValidator(
+            QtGui.QDoubleValidator(
+                0, # bottom
+                5000, # top
+                0, # decimals 
+                notation=QtGui.QDoubleValidator.StandardNotation
+            ))
+            '''
             '''
                 pickup_rate 
             '''
-            pickup_rate = self.w.MAIN.PREFS_.getpref(ConfigElement.PICKUP_RATE, 200, int, ConfigElement.ATC_SECTION)
+            pickup_rate = self.w.MAIN.PREFS_.getpref(ConfigElement.PICKUP_RATE, 1800, int, ConfigElement.ATC_SECTION)
             log.debug(f'{ConfigElement.PICKUP_RATE} = {pickup_rate}')
             self.pickupRateInput = self.w.leSFPickUpRate
             self.pickupRateInput.setText(str(pickup_rate))
+            self.c[AtcHalPin.PICKUP_RATE] = int(pickup_rate)
             self.pickupRateInput.editingFinished.connect(
                 lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.PICKUP_RATE, int(self.pickupRateInput.text()), int, ConfigElement.ATC_SECTION),
                 self.setPinValue( pinName = AtcHalPin.PICKUP_RATE, pinVal = int(self.pickupRateInput.text())),
                 log.debug(f'SETTING {ConfigElement.PICKUP_RATE} = {self.pickupRateInput.text()} in preferences'))
                 )
+            
+            self.pickupRateInput.setValidator(
+            QtGui.QDoubleValidator(
+                0, # bottom
+                5000, # top
+                0, # decimals 
+                notation=QtGui.QDoubleValidator.StandardNotation
+            ))
             '''
                 drop_rate 
             '''
-            drop_rate = self.w.MAIN.PREFS_.getpref(ConfigElement.DROP_RATE, 200, int, ConfigElement.ATC_SECTION)
+            drop_rate = self.w.MAIN.PREFS_.getpref(ConfigElement.DROP_RATE, 1800, int, ConfigElement.ATC_SECTION)
             log.debug(f'{ConfigElement.DROP_RATE} = {drop_rate}')
             self.dropRateInput = self.w.leSFDropRate
             self.dropRateInput.setText(str(drop_rate))
+            self.c[AtcHalPin.DROP_RATE] = int(drop_rate)
             self.dropRateInput.editingFinished.connect(
                 lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.DROP_RATE, int(self.dropRateInput.text()), int, ConfigElement.ATC_SECTION),
                 self.setPinValue( pinName = AtcHalPin.DROP_RATE, pinVal = int(self.dropRateInput.text())),
                 log.debug(f'SETTING {ConfigElement.DROP_RATE} = {self.dropRateInput.text()} in preferences'))
                 )
+            self.dropRateInput.setValidator(
+            QtGui.QDoubleValidator(
+                0, # bottom
+                5000, # top
+                0, # decimals 
+                notation=QtGui.QDoubleValidator.StandardNotation
+            ))
             '''
-                spindle_speed 
+                spindle_speed_pickup
             '''
-            spindle_speed = self.w.MAIN.PREFS_.getpref(ConfigElement.SPINDLE_SPEED, 800, int, ConfigElement.ATC_SECTION)
-            log.debug(f'{ConfigElement.SPINDLE_SPEED} = {spindle_speed}')
-            self.spindleSpeedInput = self.w.leToolIRSpindleSpeed
-            self.spindleSpeedInput.setText(str(spindle_speed))
+            spindle_speed_pickup = self.w.MAIN.PREFS_.getpref(ConfigElement.SPINDLE_SPEED_PICKUP, 1500, int, ConfigElement.ATC_SECTION)
+            log.debug(f'{ConfigElement.SPINDLE_SPEED_PICKUP} = {spindle_speed_pickup}')
+            self.spindleSpeedInput = self.w.leSpindleSpeedPickup
+            self.spindleSpeedInput.setText(str(spindle_speed_pickup))
+            self.c[AtcHalPin.SPINDLE_SPEED_PICKUP] = int(spindle_speed_pickup)
             self.spindleSpeedInput.editingFinished.connect(
-                lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.SPINDLE_SPEED, int(self.spindleSpeedInput.text()), int, ConfigElement.ATC_SECTION),
-                self.setPinValue( pinName = AtcHalPin.SPINDLE_SPEED, pinVal = int(self.spindleSpeedInput.text())),
-                log.debug(f'SETTING {ConfigElement.SPINDLE_SPEED} = {self.spindleSpeedInput.text()} in preferences'))
+                lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.SPINDLE_SPEED_PICKUP, int(self.spindleSpeedInput.text()), int, ConfigElement.ATC_SECTION),
+                self.setPinValue( pinName = AtcHalPin.SPINDLE_SPEED_PICKUP, pinVal = int(self.spindleSpeedInput.text())),
+                log.debug(f'SETTING {ConfigElement.SPINDLE_SPEED_PICKUP} = {self.spindleSpeedInput.text()} in preferences'))
                 )
+            self.spindleSpeedInput.setValidator(
+            QtGui.QDoubleValidator(
+                0, # bottom
+                5000, # top
+                0, # decimals 
+                notation=QtGui.QDoubleValidator.StandardNotation
+            ))
+            '''
+                spindle speed drop
+            '''
+            spindle_speed_drop = self.w.MAIN.PREFS_.getpref(ConfigElement.SPINDLE_SPEED_DROP, 1500, int, ConfigElement.ATC_SECTION)
+            log.debug(f'{ConfigElement.SPINDLE_SPEED_DROP} = {spindle_speed_drop}')
+            self.spindleSpeedInputDrop = self.w.leSpindleSpeedDrop
+            self.spindleSpeedInputDrop.setText(str(spindle_speed_drop))
+            self.c[AtcHalPin.SPINDLE_SPEED_DROP] = int(spindle_speed_drop)
+            self.spindleSpeedInputDrop.editingFinished.connect(
+                lambda: (self.w.MAIN.PREFS_.putpref(ConfigElement.SPINDLE_SPEED_DROP, int(self.spindleSpeedInputDrop.text()), int, ConfigElement.ATC_SECTION),
+                self.setPinValue( pinName = AtcHalPin.SPINDLE_SPEED_DROP, pinVal = int(self.spindleSpeedInputDrop.text())),
+                log.debug(f'SETTING {ConfigElement.SPINDLE_SPEED_DROP} = {self.spindleSpeedInputDrop.text()} in preferences'))
+                )
+            self.spindleSpeedInputDrop.setValidator(
+            QtGui.QDoubleValidator(
+                0, # bottom
+                5000, # top
+                0, # decimals 
+                notation=QtGui.QDoubleValidator.StandardNotation
+            ))
             '''
                 ir_enabled
             '''
             ir_enabled = self.w.MAIN.PREFS_.getpref(ConfigElement.IR_ENABLED, True, bool, ConfigElement.ATC_SECTION)
             log.debug(f'{ConfigElement.IR_ENABLED} = {ir_enabled}')
-            self.irEnabledInput = self.w.btnIREnabled
+            self.irEnabledInput = self.w.btn_ir_enabled
             self.irEnabledInput.setChecked(ir_enabled)
+            self.setIREnabled(ir_enabled)
+            self.w.btn_ir_enabled.clicked.connect(
+                lambda: ( self.setIREnabled(self.w.btn_ir_enabled.isChecked()))
+            )
+
+
+            cover_enabled = self.w.MAIN.PREFS_.getpref(ConfigElement.COVER_ENABLED, True, bool, ConfigElement.ATC_SECTION)
+            log.debug(f'{ConfigElement.COVER_ENABLED} = {cover_enabled}')
+            self.coverEnabledInput = self.w.btnCoverEnabled
+            self.coverEnabledInput.setChecked(cover_enabled)
+            self.setCoverEnabled(cover_enabled)
+            self.w.btnCoverEnabled.clicked.connect(
+                lambda: ( self.setCoverEnabled(self.w.btnCoverEnabled.isChecked()))
+            )
+
+            tool_dict = self.tooldb.get_tools()
+            for k, v in tool_dict.items():
+                pin_name = f'{AtcHalPin.TOOL_INDEX}{k}'
+                #if pin_name not in self.c.getpins():
+                self.c.newpin(pin_name.lower(), hal.HAL_FLOAT, hal.HAL_IN)
+                self.setPinValue(pinName=pin_name.lower(), pinVal=v)
             
+            for x in range(len(tool_dict)+1, 25):
+                pin_name = f'{AtcHalPin.TOOL_INDEX}T{x}'
+                self.c.newpin(pin_name.lower(), hal.HAL_FLOAT, hal.HAL_IN)
+
             self.c.ready()
+
+            #self.w.web_view.page().urlChanged.connect(self.onLoadFinished)
 
 
     #######################
@@ -612,7 +731,7 @@ class HandlerClass:
         else:
             self.setPinValue(pinName=AtcHalPin.IR_ENABLED, pinVal=0)
         self.w.MAIN.PREFS_.putpref(ConfigElement.IR_ENABLED, b, bool, ConfigElement.ATC_SECTION)
-        self.w.btnIREnabled.setChecked(b)
+        self.w.btn_ir_enabled.setChecked(b)
 
     def setCoverEnabled(self, b:bool):
         if b == True:
@@ -622,6 +741,10 @@ class HandlerClass:
         self.w.MAIN.PREFS_.putpref(ConfigElement.COVER_ENABLED, b, bool, ConfigElement.ATC_SECTION)
         self.w.btnCoverEnabled.setChecked(b)
 
+        #info = "I LIKE CHEEEEEEZE!"
+        #mess = {'NAME':'MESSAGE', 'TITLE':'SOME TITLE', 'ICON':'WARNING', 'ID':'__test1__', 'MESSAGE':'OVERWRITE FILE?', 'MORE':info, 'TYPE':'YESNO','NONBLOCKING':True}
+        #ACTION.CALL_DIALOG(mess)
+
     def toggleDustCover(self):
         b = self.c[AtcHalPin.DUST_COVER_STATE]
         if b == 0:
@@ -629,7 +752,13 @@ class HandlerClass:
         else:
             self.executeProgram('o<_dust_cover_op> call [0]')
         
-
+    def dialog_return(self, w, message):
+        print('RETURN FROM DIALOG')
+        rtn = message.get('RETURN')
+        code = bool(message.get('ID') == '__test1__')
+        name = bool(message.get('NAME') == 'MESSAGE')
+        if code and name and not rtn is None:
+            print('Entry return value from {} = {}'.format(code, rtn))
     
         
     def toggleAllHomed(self, w, data):
@@ -650,15 +779,23 @@ class HandlerClass:
             self.currentTool = 0
             self.currentToolPocketNo = 0
             self.w.lblToolPocket.setText('NONE')
+            self.w.btnDropTool.setEnabled(False)
         else:
             if s.interp_state == linuxcnc.INTERP_IDLE:
                 self.currentTool = s.tool_in_spindle
                 self.w.lblToolNo.setText(str(s.tool_in_spindle))
                 self.tooldb.load_tool_db() # force a reload to catch any changes
+
+                tool_dict = self.tooldb.get_tools()
+                for k, v in tool_dict.items():
+                    pin_name = f'{AtcHalPin.TOOL_INDEX}{k}'
+                    self.setPinValue(pinName=pin_name.lower(), pinVal=v)
+
                 p = self.getToolPocketByIndex(s.tool_in_spindle)
                 self.currentToolPocketNo = p
                 self.setPinValue(pinName=AtcHalPin.CURRENT_TOOL_POCKET, pinVal=p)
                 self.w.lblToolPocket.setText(str(p))
+                self.w.btnDropTool.setEnabled(True)
 
     '''
         def outputToolTable(self):
@@ -673,6 +810,7 @@ class HandlerClass:
         else:
             print("no tool loaded")
     '''
+    
 
             
     def getToolPocketByIndex(self, index):
@@ -695,6 +833,16 @@ class HandlerClass:
             self.w.tooloffsetview.repaint()
             cmd = linuxcnc.command()
             cmd.load_tool_table()
+
+    def loadToolViaATC(self):
+        t = self.getSelectedToolFromTable()
+        if len(t) > 0:
+            p = self.getToolPocketByIndex(t[0])
+            self.executeProgram(f'o<_pickup_tool> call [{p}] [{t[0]}]')
+            #self.w.tooloffsetview.repaint()
+            #cmd = linuxcnc.command()
+            #cmd.load_tool_table()
+
         
     def getSelectedToolFromTable(self):
         tool = self.w.tooloffsetview.get_checked_list()
@@ -724,6 +872,8 @@ class HandlerClass:
 
     def isMachineMetric(self) -> bool:
         return INFO.MACHINE_IS_METRIC
+
+
     ##############################
     # required class boiler code #
     ##############################

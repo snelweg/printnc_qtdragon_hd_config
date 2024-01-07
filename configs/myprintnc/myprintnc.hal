@@ -81,7 +81,7 @@ net xenable joint.0.amp-enable-out => stepgen.0.enable
 #net min-home-x => joint.0.home-sw-in
 #net min-home-x => joint.0.neg-lim-sw-in
 
-net switch-raw parport.0.pin-13-in => debounce.0.0.in
+net switch-raw parport.0.pin-13-in-not => debounce.0.0.in
 net switch-debounced debounce.0.0.out joint.0.home-sw-in joint.0.pos-lim-sw-in
 
 setp stepgen.1.position-scale [JOINT_1]SCALE
@@ -123,5 +123,5 @@ net switch-debounced-z debounce.0.2.out joint.2.home-sw-in joint.2.pos-lim-sw-in
 net estop-out <= iocontrol.0.user-enable-out
 net estop-out => iocontrol.0.emc-enable-in
 
-#next line is an absolute must for manual tool change prompting prior to auto-tool measurement (i.e., M6 remap operation)
+#next line is an absolute must for tool change prior to auto-tool measurement (i.e., M6 remap operation)
 net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared

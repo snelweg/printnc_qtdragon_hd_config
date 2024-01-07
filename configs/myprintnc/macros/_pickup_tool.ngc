@@ -1,0 +1,98 @@
+; MIT License
+
+; Copyright 2023 Kenneth Thompson
+
+; Permission is hereby granted, free of charge, to any person obtaining a copy
+; of this software and associated documentation files (the "Software"), to deal
+; in the Software without restriction, including without limitation the rights
+; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+; copies of the Software, and to permit persons to whom the Software is
+; furnished to do so, subject to the following conditions:
+
+; The above copyright notice and this permission notice shall be included in all
+; copies or substantial portions of the Software.
+
+; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+; SOFTWARE.
+(pickup tool from target pocket)
+o<_pickup_tool> sub
+M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+o100 if[#<_current_tool> NE 0]
+    M72 ; Restore modal state
+    (ABORT, Tool is already loaded!)
+o100 endif 
+o101 if[#1 EQ 0 OR #1 GT #<_hal[rapid_atc.num_pockets]>]
+    M72 ; Restore modal state
+    (ABORT, Pocket number invalid, expected a value between 1 and #<_hal[rapid_atc.num_pockets]>, got #1)
+o101 endif
+(print, Picking up tool from pocket #1)
+#<pocket>= #1
+#<toolno>= #2
+G61 ; Use exact stop mode
+G90 ; Ensure everything that we do is done in absolute coordinates
+G40 ; Cutter comp off, otherwise G53 might go wrong
+G49 ; Cancel tool offset (not needed until the end)
+(print, rapid move to safe Z)
+G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; First things first, rapid to safe Z
+#<xpos> = 1
+#<ypos> = 1
+o102 if[#<_hal[rapid_atc.align_axis]> EQ 0]
+; align axis is along X
+    (print, pockets arranged along X axis)
+    #<xpos> = [#<_hal[rapid_atc.first_pocket_x]> + [[#<pocket> - 1] * #<_hal[rapid_atc.pocket_offset]>]]
+    #<ypos> = #<_hal[rapid_atc.first_pocket_y]>
+    (print, xpos = #<xpos>, ypos = #<ypos>)
+o102 else
+; align axis is along Y
+    (print, pockets arranged along Y axis)
+    #<ypos> = [#<_hal[rapid_atc.first_pocket_y]> + [[#<pocket> - 1] * #<_hal[rapid_atc.pocket_offset]>]]
+    #<xpos> = #<_hal[rapid_atc.first_pocket_x]>
+    (print, xpos = #<xpos>, ypos = #<ypos>) 
+o102 endif
+(print, Moving to position: X#<xpos>, Y#<ypos>)
+G90
+G53 G0 X[#<xpos>] Y[#<ypos>]
+;M61 Q0     
+(print, Opening dust cover..)
+M65 P0 ; open dust cover
+G4 P2.0 ; dwell to allow cover to open
+(print, Moving to Z IR engage position..)
+G53 G0 Z[#<_hal[rapid_atc.z_ir_engage]>]
+M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0 ; Check that IR sensor is indicating no tool
+#<_tool_sensor_empty> = 0 ; hard coded for testing
+o103 if [#<_tool_sensor_empty> EQ 1]
+    M72 ; Restore modal state
+    (print, Tool detected in spindle - Aborting!)
+    o103 return [-1]
+o103 endif
+(print, Rotating spindle CW)
+M3 S[#<_hal[rapid_atc.spindle_speed_pickup]>]; Rotate spindle CW
+G4 P 2.0 ; dwell for a moment
+(print, Moving Z to  engage position to dump tool..)
+G53 G1 Z[#<_hal[rapid_atc.engage_z]>] F[#<_hal[rapid_atc.pickup_feed_rate]>]; pickup tool from pocket
+(print, Moving Z back to IR engage position)
+G53 G0 Z[#<_hal[rapid_atc.z_ir_engage]>] ; move back to IR engage 
+(print, Stopping spindle)
+M5 ;stop spindle
+G4 P2.0 ; dwell for a moment
+(print, Checking IR sensor..)
+M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0  ; Check that IR sensor is indicating a tool is present
+#<_tool_sensor_empty> = 0 ; hard coded for testing
+o104 if [#<_tool_sensor_empty> EQ 1]
+    M72 ; Restore modal state
+    (print, Timeout! Tool not in spindle - Aborting!)
+    o104 return [-1]
+o104 endif
+; good!
+(print, Succesfully picked up tool from pocket)
+M61 Q[#<toolno>] ; Set tool as loaded
+(print, Returning to Safe Z Position)
+G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; Rapid back to Safe Z
+o<_pickup_tool> return [0]
+o<_pickup_tool> endsub
+M2

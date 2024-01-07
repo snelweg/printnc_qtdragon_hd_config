@@ -1,3 +1,24 @@
+; MIT License
+
+; Copyright 2023 Kenneth Thompson
+
+; Permission is hereby granted, free of charge, to any person obtaining a copy
+; of this software and associated documentation files (the "Software"), to deal
+; in the Software without restriction, including without limitation the rights
+; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+; copies of the Software, and to permit persons to whom the Software is
+; furnished to do so, subject to the following conditions:
+
+; The above copyright notice and this permission notice shall be included in all
+; copies or substantial portions of the Software.
+
+; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+; SOFTWARE.
 (drop current tool into target pocket)
 o<_drop_tool> sub
 M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
@@ -23,17 +44,18 @@ G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; First things first, rapid to safe Z
 o102 if[#<_hal[rapid_atc.align_axis]> EQ 0]
 ; align axis is along X
     (print, pockets arranged along X axis)
-    #<xpos> = [#<_hal[rapid_atc.first_pocket_x]> + [#<droppocket> - 1] * #<_hal[rapid_atc.pocket_offset]> * #<_hal[rapid_atc.align_dir]>]
+    #<xpos> = [#<_hal[rapid_atc.first_pocket_x]> + [[#<droppocket> - 1] * #<_hal[rapid_atc.pocket_offset]>]]
     #<ypos> = #<_hal[rapid_atc.first_pocket_y]>
     (print, xpos = #<xpos>, ypos = #<ypos>)
 o102 else
 ; align axis is along Y
     (print, pockets arranged along Y axis)
-    #<ypos> = [#<_hal[rapid_atc.first_pocket_y]> + [#<droppocket> - 1] * #<_hal[rapid_atc.pocket_offset]> * #<_hal[rapid_atc.align_dir]>]
+    #<ypos> = [#<_hal[rapid_atc.first_pocket_y]> + [[#<droppocket> - 1] * #<_hal[rapid_atc.pocket_offset]>]]
     #<xpos> = #<_hal[rapid_atc.first_pocket_x]>
     (print, xpos = #<xpos>, ypos = #<ypos>) 
 o102 endif
 (print, Moving to position: X#<xpos>, Y#<ypos>)
+G90
 G53 G0 X[#<xpos>] Y[#<ypos>]
 ;M61 Q0     
 (print, Opening dust cover..)
@@ -44,14 +66,15 @@ G53 G0 Z[#<_hal[rapid_atc.z_ir_engage]>]
 M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0 ; Check that IR sensor is indicating no tool
 #<_tool_sensor_empty> = 0 ; hard coded for testing
 o103 if [#<_tool_sensor_empty> EQ 1]
+    M72 ; Restore modal state
     (print, No tool detected in spindle - Aborting!)
     o103 return [-1]
 o103 endif
 (print, Rotating spindle CCW)
-M4 S1200 ; Rotate spindle CCW
+M4 S[#<_hal[rapid_atc.spindle_speed_drop]>] ; Rotate spindle CCW
 G4 P 2.0 ; dwell for a moment
 (print, Moving Z to  engage position to dump tool..)
-G53 G1 Z[#<_hal[rapid_atc.engage_z]>] F40 ; dump tool into pocket
+G53 G1 Z[#<_hal[rapid_atc.engage_z]>] F[#<_hal[rapid_atc.drop_feed_rate]>] ; dump tool into pocket
 (print, Moving Z back to IR engage position)
 G53 G0 Z[#<_hal[rapid_atc.z_ir_engage]>] ; move back to IR engage 
 (print, Stopping spindle)
@@ -61,6 +84,7 @@ G4 P2.0 ; dwell for a moment
 M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0  ; Check that IR sensor is indicating no tool
 #<_tool_sensor_empty> = 1 ; hard coded for testing
 o104 if [#<_tool_sensor_empty> EQ 0]
+    M72 ; Restore modal state
     (print, Timeout! Tool still in spindle - Aborting!)
     o104 return [-1]
 o104 endif
