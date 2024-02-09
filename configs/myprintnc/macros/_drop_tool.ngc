@@ -21,22 +21,24 @@
 ; SOFTWARE.
 (drop current tool into target pocket)
 o<_drop_tool> sub
-M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+;M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
 o100 if[#<_current_tool> EQ 0]
-    M72 ; Restore modal state
-    (ABORT, No tool is currently loaded!)
+    ;M72 ; Restore modal state
+    (print, No tool is currently loaded! Aborting..)
+    o100 return [-1]
 o100 endif 
 o101 if[#1 EQ 0 OR #1 GT #<_hal[rapid_atc.num_pockets]>]
-    M72 ; Restore modal state
-    (ABORT, Pocket number invalid, expected a value between 1 and #<_hal[rapid_atc.num_pockets]>, got #1)
+    ;M72 ; Restore modal state
+    (print, Pocket number invalid, expected a value between 1 and #<_hal[rapid_atc.num_pockets]>, got #1)
+    o101 return [-1]
 o101 endif
 (print, mounteds tool = #<_current_tool>)
 (print, Dropping tool into pocket #1)
 #<droppocket>= #1
-G61 ; Use exact stop mode
-G90 ; Ensure everything that we do is done in absolute coordinates
-G40 ; Cutter comp off, otherwise G53 might go wrong
-G49 ; Cancel tool offset (not needed until the end)
+;G61 ; Use exact stop mode
+;G90 ; Ensure everything that we do is done in absolute coordinates
+;G40 ; Cutter comp off, otherwise G53 might go wrong
+;G49 ; Cancel tool offset (not needed until the end)
 (print, rapid move to safe Z)
 G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; First things first, rapid to safe Z
 #<xpos> = 1
@@ -93,6 +95,6 @@ o104 endif
 M61 Q0 ; Clear tool
 (print, Returning to Safe Z Position)
 G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; Rapid back to Safe Z
-o<_drop_tool> return [0]
+o<_drop_tool> return [1] ; return success
 o<_drop_tool> endsub
 M2

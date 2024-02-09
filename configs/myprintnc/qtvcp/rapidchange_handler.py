@@ -27,7 +27,7 @@ import debugpy
 import linuxcnc
 import sys
 import hal
-
+#import emccanon
 
 # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
 debugpy.listen(('0.0.0.0',5678))
@@ -112,7 +112,7 @@ class AtcHalPin(StrEnum):
     X_MANUAL_CHANGE_POS = 'x_manual_change_pos'
     Y_MANUAL_CHANGE_POS = 'y_manual_change_pos'
     CURRENT_TOOL_POCKET = 'current_tool_pocket'
-    TOOL_INDEX = 'tool_'
+    #TOOL_INDEX = 'tool_'
     IR_ENABLED = 'ir_enabled'
     COVER_ENABLED = 'cover_enabled'
     DUST_COVER_STATE = 'dust_cover_state'
@@ -696,6 +696,7 @@ class HandlerClass:
                 lambda: ( self.setCoverEnabled(self.w.btnCoverEnabled.isChecked()))
             )
 
+            '''
             tool_dict = self.tooldb.get_tools()
             for k, v in tool_dict.items():
                 pin_name = f'{AtcHalPin.TOOL_INDEX}{k}'
@@ -706,6 +707,9 @@ class HandlerClass:
             for x in range(len(tool_dict)+1, 25):
                 pin_name = f'{AtcHalPin.TOOL_INDEX}T{x}'
                 self.c.newpin(pin_name.lower(), hal.HAL_FLOAT, hal.HAL_IN)
+            '''
+
+
 
             self.c.ready()
 
@@ -766,36 +770,42 @@ class HandlerClass:
         pass
 
     def updatePeriodic(self):
-        homed = QHAL.getvalue('motion.is-all-homed')
-        machine_on = QHAL.getvalue('halui.machine.is-on')
-        self.w.gbToolActions.setEnabled((homed & machine_on))
-        self.w.gbMacros.setEnabled((homed & machine_on))
-        self.w.lblMachineOnNotice.setVisible(not (homed & machine_on))
-        
-        s = self.getCurrentStat()#linuxcnc.stat()
-        s.poll()
-        if s.tool_in_spindle == 0:
-            self.w.lblToolNo.setText('EMPTY')
-            self.currentTool = 0
-            self.currentToolPocketNo = 0
-            self.w.lblToolPocket.setText('NONE')
-            self.w.btnDropTool.setEnabled(False)
-        else:
-            if s.interp_state == linuxcnc.INTERP_IDLE:
-                self.currentTool = s.tool_in_spindle
-                self.w.lblToolNo.setText(str(s.tool_in_spindle))
-                self.tooldb.load_tool_db() # force a reload to catch any changes
+        try:
+            homed = QHAL.getvalue('motion.is-all-homed')
+            machine_on = QHAL.getvalue('halui.machine.is-on')
+            self.w.gbToolActions.setEnabled((homed & machine_on))
+            self.w.gbMacros.setEnabled((homed & machine_on))
+            self.w.lblMachineOnNotice.setVisible(not (homed & machine_on))
+            
+            s = self.getCurrentStat()#linuxcnc.stat()
+            s.poll()
+            if s.tool_in_spindle == 0:
+                self.w.lblToolNo.setText('EMPTY')
+                self.currentTool = 0
+                self.currentToolPocketNo = 0
+                self.setPinValue(pinName=AtcHalPin.CURRENT_TOOL_POCKET, pinVal=0)
+                self.w.lblToolPocket.setText('NONE')
+                self.w.btnDropTool.setEnabled(False)
+            else:
+                if s.interp_state == linuxcnc.INTERP_IDLE:
+                    self.currentTool = s.tool_in_spindle
+                    self.w.lblToolNo.setText(str(s.tool_in_spindle))
+                    self.tooldb.load_tool_db() # force a reload to catch any changes
 
-                tool_dict = self.tooldb.get_tools()
-                for k, v in tool_dict.items():
-                    pin_name = f'{AtcHalPin.TOOL_INDEX}{k}'
-                    self.setPinValue(pinName=pin_name.lower(), pinVal=v)
+                    #tool_dict = self.tooldb.get_tools()
+                    #for k, v in tool_dict.items():
+                    #    pin_name = f'{AtcHalPin.TOOL_INDEX}{k}'
+                    #    self.setPinValue(pinName=pin_name.lower(), pinVal=v)
 
-                p = self.getToolPocketByIndex(s.tool_in_spindle)
-                self.currentToolPocketNo = p
-                self.setPinValue(pinName=AtcHalPin.CURRENT_TOOL_POCKET, pinVal=p)
-                self.w.lblToolPocket.setText(str(p))
-                self.w.btnDropTool.setEnabled(True)
+                    p = self.getToolPocketByIndex(s.tool_in_spindle)
+                    self.currentToolPocketNo = p
+                    self.setPinValue(pinName=AtcHalPin.CURRENT_TOOL_POCKET, pinVal=p)
+                    self.w.lblToolPocket.setText(str(p))
+                    self.w.btnDropTool.setEnabled(True)
+        except Exception as ex:
+            print(ex)
+            pass
+
 
     '''
         def outputToolTable(self):
@@ -830,9 +840,11 @@ class HandlerClass:
         t = self.getSelectedToolFromTable()
         if len(t) > 0:
             self.executeProgram(f'M61 Q{t[0]}')
+           #emccanon.CHANGE_TOOL(2)
             self.w.tooloffsetview.repaint()
             cmd = linuxcnc.command()
             cmd.load_tool_table()
+            
 
     def loadToolViaATC(self):
         t = self.getSelectedToolFromTable()

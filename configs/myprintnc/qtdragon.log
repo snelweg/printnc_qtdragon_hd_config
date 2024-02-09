@@ -1,323 +1,72 @@
-2024-01-06 22:16:53,293 - QTvcp.QTDRAGON_HD_HANDLER - WARNING - QtDragon warning with loading QtWebEngineWidget - is python3-pyqt5.qtwebengine installed?
-2024-01-06 22:17:03,145 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - INIT qtvcp handler
-2024-01-06 22:17:03,176 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - num_pockets = 6
-2024-01-06 22:17:03,181 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pocket_offset = -45
-2024-01-06 22:17:03,184 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_x = 474.570
-2024-01-06 22:17:03,198 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_y = 560.160
-2024-01-06 22:17:03,199 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage = -129
-2024-01-06 22:17:03,200 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage_drop_offset = 0
-2024-01-06 22:17:03,202 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_ir_engage = -100
-2024-01-06 22:17:03,234 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_safe_clearance = 0
-2024-01-06 22:17:03,239 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_hal_dpin = 2
-2024-01-06 22:17:03,247 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_hal_dpin = 3
-2024-01-06 22:17:03,251 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - x_manual_change_pos = 0
-2024-01-06 22:17:03,273 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - y_manual_change_pos = 0
-2024-01-06 22:17:03,277 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - align_axis = X
-2024-01-06 22:17:03,316 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pickup_rate = 2000
-2024-01-06 22:17:03,328 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - drop_rate = 2000
-2024-01-06 22:17:03,348 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_pickup = 1500
-2024-01-06 22:17:03,354 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_drop = 1500
-2024-01-06 22:17:03,374 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_enabled = True
-2024-01-06 22:17:03,379 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_enabled = True
-2024-01-06 22:17:04,951 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbSafeZ": max = 47 characters
+2024-02-09 11:19:00,853 - QTvcp.QTDRAGON_HD_HANDLER - WARNING - QtDragon warning with loading QtWebEngineWidget - is python3-pyqt5.qtwebengine installed?
+2024-02-09 11:19:17,577 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - INIT qtvcp handler
+2024-02-09 11:19:17,581 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - num_pockets = 6
+2024-02-09 11:19:17,581 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pocket_offset = -45
+2024-02-09 11:19:17,582 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_x = 474.570
+2024-02-09 11:19:17,583 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_y = 560.160
+2024-02-09 11:19:17,583 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage = -126.8
+2024-02-09 11:19:17,584 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage_drop_offset = 0
+2024-02-09 11:19:17,584 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_ir_engage = -100
+2024-02-09 11:19:17,585 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_safe_clearance = 0
+2024-02-09 11:19:17,585 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_hal_dpin = 2
+2024-02-09 11:19:17,585 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_hal_dpin = 3
+2024-02-09 11:19:17,628 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - x_manual_change_pos = 0
+2024-02-09 11:19:17,638 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - y_manual_change_pos = 0
+2024-02-09 11:19:17,654 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - align_axis = X
+2024-02-09 11:19:17,665 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pickup_rate = 2000
+2024-02-09 11:19:17,666 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - drop_rate = 2000
+2024-02-09 11:19:17,675 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_pickup = 1500
+2024-02-09 11:19:17,693 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_drop = 1700
+2024-02-09 11:19:17,698 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_enabled = True
+2024-02-09 11:19:17,716 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_enabled = True
+2024-02-09 11:19:18,234 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbSafeZ": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/simple_widgets.py
     Line 1267
     Function: _hal_init
-2024-01-06 22:17:05,019 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-09 11:19:18,243 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbSafeZ": max = 47 characters
 
-2024-01-06 22:17:05,043 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbToolChangeTest": max = 47 characters
+2024-02-09 11:19:18,267 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbToolChangeTest": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/simple_widgets.py
     Line 1267
     Function: _hal_init
-2024-01-06 22:17:05,074 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-09 11:19:18,282 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbToolChangeTest": max = 47 characters
 
-2024-01-06 22:17:05,132 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.ledIRTrigger": max = 47 characters
+2024-02-09 11:19:18,334 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.ledIRTrigger": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/state_led.py
     Line 86
     Function: _hal_init
-2024-01-06 22:17:05,140 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-09 11:19:18,337 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.ledIRTrigger": max = 47 characters
 
-2024-01-06 22:17:05,177 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbXAxis": max = 47 characters
+2024-02-09 11:19:18,350 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbXAxis": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/simple_widgets.py
     Line 1267
     Function: _hal_init
-2024-01-06 22:17:05,190 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-09 11:19:18,366 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbXAxis": max = 47 characters
 
-2024-01-06 22:17:05,220 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.yy": max = 47 characters
+2024-02-09 11:19:18,387 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.yy": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/simple_widgets.py
     Line 1267
     Function: _hal_init
-2024-01-06 22:17:05,246 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-09 11:19:18,396 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.yy": max = 47 characters
 
-2024-01-06 22:20:46,908 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:20:47,191 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:21:57,369 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:21:57,866 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:22:35,835 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:22:36,467 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:26:30,652 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:26:31,241 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:27:12,414 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:27:13,000 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:28:43,648 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:28:44,227 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:39:14,327 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:39:15,023 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:40:13,551 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:40:14,119 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:40:52,949 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:40:53,278 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:42:05,578 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:42:06,071 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:43:04,597 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:43:04,961 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:43:22,524 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:43:23,034 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:43:58,621 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:43:59,063 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:56:43,491 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:56:43,886 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:56:44,165 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:59:22,170 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:59:22,549 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:59:22,869 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:59:31,619 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 22:59:31,863 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:02:49,060 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:02:49,233 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:03:47,397 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:03:48,060 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:04:30,369 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:04:31,078 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:04:56,772 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-01-06 23:04:57,669 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
+2024-02-09 11:22:36,850 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - Calling cleanup for shutdown..

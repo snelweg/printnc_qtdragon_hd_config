@@ -21,22 +21,23 @@
 ; SOFTWARE.
 (pickup tool from target pocket)
 o<_pickup_tool> sub
-M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+;M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
 o100 if[#<_current_tool> NE 0]
-    M72 ; Restore modal state
-    (ABORT, Tool is already loaded!)
+    ;M72 ; Restore modal state
+    o103 return [-1] ; indicate failure, tool already present
 o100 endif 
 o101 if[#1 EQ 0 OR #1 GT #<_hal[rapid_atc.num_pockets]>]
-    M72 ; Restore modal state
-    (ABORT, Pocket number invalid, expected a value between 1 and #<_hal[rapid_atc.num_pockets]>, got #1)
+    ;M72 ; Restore modal state
+    (print, Pocket number invalid, expected a value between 1 and #<_hal[rapid_atc.num_pockets]>, got #1)
+    o101 return [-1] ; indicate failure
 o101 endif
 (print, Picking up tool from pocket #1)
 #<pocket>= #1
 #<toolno>= #2
-G61 ; Use exact stop mode
-G90 ; Ensure everything that we do is done in absolute coordinates
-G40 ; Cutter comp off, otherwise G53 might go wrong
-G49 ; Cancel tool offset (not needed until the end)
+;G61 ; Use exact stop mode
+;G90 ; Ensure everything that we do is done in absolute coordinates
+;G40 ; Cutter comp off, otherwise G53 might go wrong
+;G49 ; Cancel tool offset (not needed until the end)
 (print, rapid move to safe Z)
 G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; First things first, rapid to safe Z
 #<xpos> = 1
@@ -66,7 +67,7 @@ G53 G0 Z[#<_hal[rapid_atc.z_ir_engage]>]
 M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0 ; Check that IR sensor is indicating no tool
 #<_tool_sensor_empty> = 0 ; hard coded for testing
 o103 if [#<_tool_sensor_empty> EQ 1]
-    M72 ; Restore modal state
+    ;M72 ; Restore modal state
     (print, Tool detected in spindle - Aborting!)
     o103 return [-1]
 o103 endif
@@ -84,7 +85,7 @@ G4 P2.0 ; dwell for a moment
 M66 P[#<_hal[rapid_atc.IR_HAL_DPIN]>] L0  ; Check that IR sensor is indicating a tool is present
 #<_tool_sensor_empty> = 0 ; hard coded for testing
 o104 if [#<_tool_sensor_empty> EQ 1]
-    M72 ; Restore modal state
+    ;M72 ; Restore modal state
     (print, Timeout! Tool not in spindle - Aborting!)
     o104 return [-1]
 o104 endif
@@ -93,6 +94,6 @@ o104 endif
 M61 Q[#<toolno>] ; Set tool as loaded
 (print, Returning to Safe Z Position)
 G53 G0 Z[#<_hal[rapid_atc.safe_z]>] ; Rapid back to Safe Z
-o<_pickup_tool> return [0]
+o<_pickup_tool> return [1] ; Return success
 o<_pickup_tool> endsub
 M2

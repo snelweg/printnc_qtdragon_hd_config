@@ -1,8 +1,8 @@
 #net spindle-speed-limited  =>  spindle.0.speed-out-rps => spindle.0.speed-in
 
-net tool-change      hal_manualtoolchange.change   <=  iocontrol.0.tool-change 
-net tool-changed     hal_manualtoolchange.changed  <=  iocontrol.0.tool-changed
-net tool-prep-number hal_manualtoolchange.number   <=  iocontrol.0.tool-prep-number
+#net tool-change      hal_manualtoolchange.change   <=  iocontrol.0.tool-change 
+#net tool-changed     hal_manualtoolchange.changed  <=  iocontrol.0.tool-changed
+#net tool-prep-number hal_manualtoolchange.number   <=  iocontrol.0.tool-prep-number
 
 # external offset spindle auto raise on pause
 net spindle-pause     qtdragon.spindle-inhibit spindle.0.inhibit

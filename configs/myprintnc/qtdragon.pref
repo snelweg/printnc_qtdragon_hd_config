@@ -26,7 +26,7 @@ RunFromLineDialog_sound_type = READY
 
 [BOOK_KEEPING]
 last_loaded_directory = /home/ken/linuxcnc/configs/myprintnc/macros
-last_loaded_file = /home/ken/linuxcnc/configs/myprintnc/macros/tool_change.ngc
+last_loaded_file = /home/ken/linuxcnc/configs/myprintnc/macros/_drop_tool.ngc
 style_QSS_Path = DEFAULT
 RecentPath_0 = /home/ken/linuxcnc/programs/skateboard_form_mellow.ngc
 
@@ -94,18 +94,18 @@ gcodegraphics-user-lat = 0.0
 gcodegraphics-user-lon = 0.0
 
 [CUSTOM_FORM_ENTRIES]
-Tool to load = 2
+Tool to load = 0
 Laser X = 100.0
 Laser Y = -20.0
-Sensor X = 5.3
-Sensor Y = 21.48
+Sensor X = 8.8
+Sensor Y = 22.48
 Camera X = 10.0
 Camera Y = 10.0
 Work Height = 50.49
 Touch Height = 40.0
 Sensor Height = 45.0
 Search Velocity = 120.0
-Probe Velocity = 75.0
+Probe Velocity = 150.0
 Max Probe = 100.0
 Retract Distance = 1.0
 Z Safe Travel = 5.0
@@ -141,7 +141,7 @@ Cal y width = 0
 Cal diameter = 0
 
 [VERSA_PROBE_OPTIONS]
-ps_searchvel = 100.0
+ps_searchvel = 150.0
 ps_probevel = 100.0
 ps_z_clearance = 3.0
 ps_probe_max = 1.0
@@ -164,7 +164,7 @@ num_pockets = 6
 pocket_offset = -45
 first_pocket_x = 474.570
 first_pocket_y = 560.160
-z_engage = -129
+z_engage = -126.8
 z_ir_engage = -100
 z_safe_clearance = 0
 cover_hal_dpin = 2
@@ -178,6 +178,6 @@ cover_enabled = True
 pickup_rate = 2000
 drop_rate = 2000
 spindle_speed_pickup = 1500
-spindle_speed_drop = 1500
+spindle_speed_drop = 1700
 z_engage_drop_offset = 0
 
