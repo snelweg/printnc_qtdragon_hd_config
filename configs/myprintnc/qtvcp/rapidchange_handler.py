@@ -27,6 +27,7 @@ import debugpy
 import linuxcnc
 import sys
 import hal
+#from subprocess import PIPE, Popen
 #import emccanon
 
 # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
@@ -249,12 +250,12 @@ class HandlerClass:
                                             self.w.tooloffsetview.repaint()))
             self.w.btnDelete.clicked.connect(lambda:(self.w.tooloffsetview.delete_tools(),\
                                                 self.w.tooloffsetview.repaint()))
-            self.w.pbSafeZ.clicked.connect(
-                lambda: self.executeProgram('o<_go_to_pos> call')
-            )
-            self.w.pbToolChangeTest.clicked.connect(
-                lambda: self.executeProgram('o<_tool_change> call [5]')
-            )
+            #self.w.pbSafeZ.clicked.connect(
+            #    lambda: self.executeProgram('o<_go_to_pos> call')
+            #)
+            #self.w.pbToolChangeTest.clicked.connect(
+            #    lambda: self.executeProgram('o<_tool_change> call [5]')
+            #)
             self.w.btnDropTool.clicked.connect(
                 lambda: self.executeProgram(f'o<_drop_tool> call [{self.currentToolPocketNo}]')
             )
@@ -708,7 +709,9 @@ class HandlerClass:
                 pin_name = f'{AtcHalPin.TOOL_INDEX}T{x}'
                 self.c.newpin(pin_name.lower(), hal.HAL_FLOAT, hal.HAL_IN)
             '''
-
+            #error_pin = Popen(
+            #    "halcmd getp gmoccapy.error ", shell=True, stdout=PIPE
+            #).stdout.read()
 
 
             self.c.ready()
@@ -750,8 +753,10 @@ class HandlerClass:
         #ACTION.CALL_DIALOG(mess)
 
     def toggleDustCover(self):
-        b = self.c[AtcHalPin.DUST_COVER_STATE]
-        if b == 0:
+        #b = self.c[AtcHalPin.DUST_COVER_STATE]
+        cover_state = QHAL.getvalue(f'motion.digital-out-0{self.coverDPinInput.text()}')
+        #self.w.ledIRTrigger.currentState = bool(ir_stat)
+        if cover_state == False:
             self.executeProgram('o<_dust_cover_op> call [1]')
         else:
             self.executeProgram('o<_dust_cover_op> call [0]')
@@ -773,6 +778,9 @@ class HandlerClass:
         try:
             homed = QHAL.getvalue('motion.is-all-homed')
             machine_on = QHAL.getvalue('halui.machine.is-on')
+            #if self.irEnabledInput:
+            ir_stat = QHAL.getvalue(f'motion.digital-in-0{int(self.irDPinInput.text())}')
+            self.w.ledIRTrigger.setState(bool(ir_stat))
             self.w.gbToolActions.setEnabled((homed & machine_on))
             self.w.gbMacros.setEnabled((homed & machine_on))
             self.w.lblMachineOnNotice.setVisible(not (homed & machine_on))

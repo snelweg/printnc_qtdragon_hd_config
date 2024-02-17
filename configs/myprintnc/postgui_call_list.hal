@@ -8,4 +8,5 @@
 #source custom.hal
 source vfd.hal
 source qtdragon_postgui.hal
-
+source rapidatc-postgui.hal
+source vc-p1as-postgui.hal

@@ -1,0 +1,3 @@
+net dust-cover motion.digital-out-00 => arduino8266.dust-cover-out
+net ir-sensor arduino8266IR.ir-sensor-in => motion.digital-in-00
+

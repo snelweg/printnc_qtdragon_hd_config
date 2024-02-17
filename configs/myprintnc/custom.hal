@@ -1,6 +1,6 @@
 # Include your customized HAL commands here
 # This file will not be overwritten when you run stepconf again
-loadusr -Wn vfd hy_vfd -n vfd -d /dev/ttyUSB0 -p none -r 19200
+loadusr -Wn vfd hy_vfd -n vfd -d /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AG0KB7CH-if00-port0 -p none -r 19200
 # Replace ttyUSB0 with the address of your adapter
 
 setp vfd.enable 1 # This enables the VFD in the driver

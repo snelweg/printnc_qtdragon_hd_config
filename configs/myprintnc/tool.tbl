@@ -1,6 +1,7 @@
-T6   P3   Z-53.222642 ;New Tool 
+T8   P8   ;New Tool 
+T6   P3   Z-53.222640 ;New Tool 
 T5   P6   ;New Tool 
 T1   P1   D+0.125000 Z+393.457910 ;10mm flat end mill 
-T2   P2   D+0.062500 Z-53.135976 ;8mm ball nose end mill 
+T2   P2   D+0.062500 Z-3.841267 ;8mm ball nose end mill 
 T3   P5   D+0.201000 Z+1.273000 ;#7 tap drill 
 T4   P4   Z+0.100000 ;big tool number 

@@ -1,24 +1,19 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1920x997+0+27
-placeFrames 0.4796511627906977
-set ::ratio 0.4796511627906977
+wm geometry . 671x394+786+396
+placeFrames 0.39974937343358397
+set ::ratio 0.39974937343358397
 set ::old_w_leftf 160
 set ::watchlist {
-    pin+rapid_atc.current_tool_pocket
-    pin+hal_manualtoolchange.change
-    pin+hal_manualtoolchange.change_button
-    pin+hal_manualtoolchange.changed
-    pin+hal_manualtoolchange.number
-    pin+qtversaprobe.searchvel
-    pin+qtversaprobe.probeheight
-    pin+qtversaprobe.blockheight
-    pin+qtversaprobe.enable
+    pin+arduino8266IR.ir-sensor-in
+    pin+motion.digital-in-00
+    pin+motion.digital-out-00
+    pin+arduino8266.dust-cover-out
 }
 set ::workmode watchhal
 set ::watchInterval 100
 set ::col1_width 100
 set ::ffmts 
 set ::ifmts 
-set ::alwaysOnTop 0
+set ::alwaysOnTop 1
 set ::autoSaveWatchlist 1

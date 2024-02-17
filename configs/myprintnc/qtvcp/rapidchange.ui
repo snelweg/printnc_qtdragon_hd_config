@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabToolChanger">
        <attribute name="title">
@@ -79,39 +79,13 @@
          </property>
         </widget>
        </widget>
-       <widget class="PushButton" name="pbSafeZ">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>290</y>
-          <width>161</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>GOTO SAFE Z</string>
-        </property>
-       </widget>
-       <widget class="PushButton" name="pbToolChangeTest">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>240</y>
-          <width>161</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>TOOL CHANGE TEST</string>
-        </property>
-       </widget>
        <widget class="ToolOffsetView" name="tooloffsetview">
         <property name="geometry">
          <rect>
           <x>200</x>
           <y>10</y>
           <width>351</width>
-          <height>391</height>
+          <height>491</height>
          </rect>
         </property>
        </widget>
@@ -1844,6 +1818,9 @@
            <height>15</height>
           </rect>
          </property>
+         <property name="flashing" stdset="0">
+          <bool>false</bool>
+         </property>
         </widget>
         <widget class="QLabel" name="lblIRTriggerStatus">
          <property name="geometry">
@@ -1868,8 +1845,8 @@
        <widget class="QLabel" name="lblMachineOnNotice">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>390</y>
+          <x>0</x>
+          <y>300</y>
           <width>181</width>
           <height>101</height>
          </rect>
@@ -2259,6 +2236,9 @@
           </property>
          </widget>
          <widget class="QLineEdit" name="leXManualChangePos">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="geometry">
            <rect>
             <x>100</x>
@@ -2272,6 +2252,9 @@
           </property>
          </widget>
          <widget class="QLineEdit" name="leYManualChangePos">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="geometry">
            <rect>
             <x>100</x>
@@ -3157,7 +3140,7 @@
            </rect>
           </property>
           <property name="inputMask">
-           <string>D</string>
+           <string>9</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -3226,7 +3209,7 @@
            </rect>
           </property>
           <property name="inputMask">
-           <string/>
+           <string>9</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
