@@ -1,156 +1,79 @@
-2024-02-17 09:09:30,648 - QTvcp.QTDRAGON_HD_HANDLER - WARNING - QtDragon warning with loading QtWebEngineWidget - is python3-pyqt5.qtwebengine installed?
-2024-02-17 09:09:40,102 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - INIT qtvcp handler
-2024-02-17 09:09:40,106 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - num_pockets = 6
-2024-02-17 09:09:40,112 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pocket_offset = -45
-2024-02-17 09:09:40,113 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_x = 474.987
-2024-02-17 09:09:40,113 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_y = 560.160
-2024-02-17 09:09:40,114 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage = -126.8
-2024-02-17 09:09:40,170 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage_drop_offset = 0
-2024-02-17 09:09:40,178 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_ir_engage = -101.724
-2024-02-17 09:09:40,184 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_safe_clearance = 0
-2024-02-17 09:09:40,205 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_hal_dpin = 0
-2024-02-17 09:09:40,219 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_hal_dpin = 0
-2024-02-17 09:09:40,237 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - x_manual_change_pos = 0
-2024-02-17 09:09:40,246 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - y_manual_change_pos = 0
-2024-02-17 09:09:40,254 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - align_axis = X
-2024-02-17 09:09:40,262 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pickup_rate = 2000
-2024-02-17 09:09:40,268 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - drop_rate = 2000
-2024-02-17 09:09:40,271 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_pickup = 1500
-2024-02-17 09:09:40,284 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_drop = 1700
-2024-02-17 09:09:40,290 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_enabled = True
-2024-02-17 09:09:40,316 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_enabled = True
-2024-02-17 09:09:41,219 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbXAxis": max = 47 characters
+2024-02-18 21:18:00,418 - QTvcp.QTDRAGON_HD_HANDLER - WARNING - QtDragon warning with loading QtWebEngineWidget - is python3-pyqt5.qtwebengine installed?
+2024-02-18 21:18:28,297 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - INIT qtvcp handler
+2024-02-18 21:18:28,368 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - num_pockets = 6
+2024-02-18 21:18:28,376 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pocket_offset = -45
+2024-02-18 21:18:28,429 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_x = 474.987
+2024-02-18 21:18:28,433 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - first_pocket_y = 560.160
+2024-02-18 21:18:28,446 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage = -126.8
+2024-02-18 21:18:28,463 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_engage_drop_offset = 0
+2024-02-18 21:18:28,480 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_ir_engage = -101.724
+2024-02-18 21:18:28,488 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - z_safe_clearance = 0
+2024-02-18 21:18:28,507 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_hal_dpin = 0
+2024-02-18 21:18:28,527 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_hal_dpin = 0
+2024-02-18 21:18:28,535 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - x_manual_change_pos = 0
+2024-02-18 21:18:28,563 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - y_manual_change_pos = 0
+2024-02-18 21:18:28,567 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - align_axis = X
+2024-02-18 21:18:28,589 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - pickup_rate = 2000
+2024-02-18 21:18:28,605 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - drop_rate = 2000
+2024-02-18 21:18:28,633 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_pickup = 1500
+2024-02-18 21:18:28,656 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - spindle_speed_drop = 1700
+2024-02-18 21:18:28,666 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - ir_enabled = True
+2024-02-18 21:18:28,728 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - cover_enabled = True
+2024-02-18 21:18:31,221 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbXAxis": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/simple_widgets.py
     Line 1267
     Function: _hal_init
-2024-02-17 09:09:41,227 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-18 21:18:31,338 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.pbXAxis": max = 47 characters
 
-2024-02-17 09:09:41,229 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.yy": max = 47 characters
+2024-02-18 21:18:31,357 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.yy": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/simple_widgets.py
     Line 1267
     Function: _hal_init
-2024-02-17 09:09:41,277 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-18 21:18:31,405 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.yy": max = 47 characters
 
-2024-02-17 09:09:41,362 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.ledIRTrigger": max = 47 characters
+2024-02-18 21:18:31,495 - QTvcp.QTVCP.CORE - ERROR - Qhal: Error making new HAL pin: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.ledIRTrigger": max = 47 characters
     /usr/lib/python3/dist-packages/qtvcp/widgets/state_led.py
     Line 86
     Function: _hal_init
-2024-02-17 09:09:41,369 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
+2024-02-18 21:18:31,508 - QTvcp.QTVCP.CORE - ERROR - Qhal: Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/core.py", line 154, in newpin
     p = QPin(_hal.component.newpin(self.comp, *a, **kw))
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 hal.error: Invalid pin name length "qtdragon./home/ken/linuxcnc/configs/myprintnc/qtvcp/rapidchange.ledIRTrigger": max = 47 characters
 
-2024-02-17 09:10:35,987 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:11:05,047 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+2024-02-18 21:20:04,274 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:20:08,050 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:20:17,871 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:20:46,385 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
 Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
     messageid = self.statusbar.showMessage(message, timeout * 1000)
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:11:05,239 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
+2024-02-18 21:20:47,929 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
 Traceback (most recent call last):
   File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
     messageid = self.statusbar.showMessage(message, timeout * 1000)
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:11:46,262 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:11:46,513 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:12:40,874 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:12:41,039 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:12:41,432 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:12:57,846 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:19:17,018 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:19:43,162 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:20:22,680 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:20:44,709 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:21:13,504 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:21:42,589 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:22:22,994 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:22:47,919 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:30:08,548 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:30:31,774 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:30:45,827 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - ERROR - No callback or STATUS message specified for: messageDialog_
-2024-02-17 09:31:38,069 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:31:40,566 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:31:42,800 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:31:44,968 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:31:47,266 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:31:49,427 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:32:44,768 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:32:47,163 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:33:00,962 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:33:04,499 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:33:07,913 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:33:17,767 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:33:32,416 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:33:34,971 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:33:40,938 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:34:08,500 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:34:46,314 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:35:11,207 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:35:11,469 - QTvcp.QTVCP.LIB.NOTIFY - WARNING - Error adding msg to  statusbar:
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/qtvcp/lib/notify.py", line 271, in show_status
-    messageid = self.statusbar.showMessage(message, timeout * 1000)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'QLineEdit' object has no attribute 'showMessage'
-2024-02-17 09:35:23,624 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:35:53,246 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:36:38,631 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:36:59,032 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:03,677 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:17,425 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:21,878 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:24,679 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:26,263 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:26,887 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:29,437 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:36,618 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:54:53,686 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:58:09,815 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 09:58:13,847 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
-2024-02-17 10:00:06,476 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - Calling cleanup for shutdown..
+2024-02-18 21:20:58,916 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:21:27,768 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:21:52,738 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:22:17,198 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:22:46,747 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:23:11,548 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:23:35,575 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:23:59,292 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:24:36,035 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:25:12,190 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:25:46,124 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:26:09,334 - QTvcp.QTVCP.WIDGETS.ACTION_BUTTON - ERROR - No action recognised
+2024-02-18 21:26:44,771 - QTvcp.RAPIDCHANGE_HANDLER - DEBUG - Calling cleanup for shutdown..

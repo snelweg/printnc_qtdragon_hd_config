@@ -794,6 +794,7 @@ class HandlerClass:
                 self.setPinValue(pinName=AtcHalPin.CURRENT_TOOL_POCKET, pinVal=0)
                 self.w.lblToolPocket.setText('NONE')
                 self.w.btnDropTool.setEnabled(False)
+                self.w.btnPickupTool.setEnabled(True)
             else:
                 if s.interp_state == linuxcnc.INTERP_IDLE:
                     self.currentTool = s.tool_in_spindle
@@ -810,6 +811,7 @@ class HandlerClass:
                     self.setPinValue(pinName=AtcHalPin.CURRENT_TOOL_POCKET, pinVal=p)
                     self.w.lblToolPocket.setText(str(p))
                     self.w.btnDropTool.setEnabled(True)
+                    self.w.btnPickupTool.setEnabled(False)
         except Exception as ex:
             print(ex)
             pass

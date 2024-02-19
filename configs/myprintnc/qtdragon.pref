@@ -16,8 +16,8 @@ pickup_rate = 2000
 drop_rate = 2000
 spindle_speed_pickup = 1500
 spindle_speed_drop = 1700
-ir_enabled = False
-cover_enabled = False
+ir_enabled = True
+cover_enabled = True
 
 [DIALOG_GEOMETRY]
 AboutDialog-geometry = half
