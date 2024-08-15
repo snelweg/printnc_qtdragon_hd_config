@@ -5,7 +5,7 @@ Work-in-progress.  This is an example config for LinuxCNC to demonstrate how to 
 
 [INI values](INI-values)
 
-[pins](pins)
+[pins](pins.md)
 
 
 Enjoy!
